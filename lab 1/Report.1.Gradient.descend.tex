@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Labwork 1: Gradient Descend}
+\author{Le Nguyen Minh Quang} 
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Algorithm Implementation}
+To implement the Gradient Descent algorithm from scratch, I first defined the objective function $f(x) = x^2$ and its first-order derivative $f'(x) = 2x$ using Python functions. 
+
+The core logic is implemented in the \texttt{gradient\_descent} function. The algorithm runs for a fixed number of iterations. In each iteration, it updates the current value of $x$ using the formula:
+\begin{equation}
+    x_{new} = x_{old} - r \cdot f'(x_{old})
+\end{equation}
+where $r$ is the learning rate. To track the progress, I print the intermediate steps including the iteration number, the current value of $x$, and the function value $f(x)$.
+
+\section{Effect of Different Learning Rates ($r$)}
+I experimented with various learning rates starting from an initial point $x = 10$. The learning rate $r$ significantly affects the convergence of the algorithm:
+
+\begin{itemize}
+    \item \textbf{Small learning rate (e.g., $r = 0.01$):} The updates to $x$ are very tiny. The algorithm is stable but converges very slowly, requiring a large number of iterations to reach the minimum ($x = 0$).
+    \item \textbf{Good learning rate (e.g., $r = 0.1$):} The algorithm converges smoothly and efficiently to the minimum within a reasonable amount of iterations.
+    \item \textbf{Large learning rate (e.g., $r = 1.1$):} The step size is too large. Instead of moving towards the minimum, the value of $x$ overshoots the minimum and diverges to infinity.
+\end{itemize}
+
+In conclusion, choosing an appropriate learning rate is crucial. A value too small leads to slow training, while a value too large causes the algorithm to diverge.
+
+\end{document}
