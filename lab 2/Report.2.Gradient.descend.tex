@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Labwork 2: Gradient Descent}
+\author{Le Nguyen Minh Quang} 
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Implementation}
+
+We make the same implementation as the Gradient Descent but extend it to two derivative functions, one for w0, one for w1. For each loop, we need to calculate the gradient for w0 and w1 which is the averaged gradient for each data samples. Afterwards we can update the weights based on these new gradients and calculate a new loss value.
+
+The linear regression model is defined as:
+
+\[
+\hat{y} = w_1x + w_0
+\]
+
+The loss function for each sample is:
+
+\[
+L_i = \frac{1}{2}(w_1x_i + w_0 - y_i)^2
+\]
+
+The total loss over the dataset is the average of all individual losses:
+
+\[
+J = \frac{1}{N}\sum_{i=1}^{N}L_i
+\]
+
+where \(N\) is the number of training samples.
+
+To optimize the model parameters, we calculate the partial derivatives of the loss function with respect to \(w_0\) and \(w_1\):
+
+\[
+\frac{\partial L}{\partial w_0} = w_1x_i + w_0 - y_i
+\]
+
+\[
+\frac{\partial L}{\partial w_1} = x_i(w_1x_i + w_0 - y_i)
+\]
+
+The weights are updated using Gradient Descent with the following update rules:
+
+\[
+w_0 = w_0 - r \frac{\partial L}{\partial w_0}
+\]
+
+\[
+w_1 = w_1 - r \frac{\partial L}{\partial w_1}
+\]
+
+where \(r\) is the learning rate.
+
+The algorithm iteratively updates the weights until the difference between two consecutive loss values becomes smaller than a tolerance threshold.
+
+\section{Experimental Result}
+
+The initial loss value is:
+
+\[
+f\_val = 5632.5
+\]
+
+During training, the loss decreases after each iteration:
+
+\begin{verbatim}
+Step 0: loss=3372.234310, w0=0.010100, w1=0.507000
+Step 1: loss=2073.809615, w0=0.018070, w1=0.891264
+Step 2: loss=1327.917833, w0=0.024424, w1=1.182502
+Step 3: loss=899.430512, w0=0.029556, w1=1.403234
+Step 4: loss=653.277290, w0=0.033759, w1=1.570527
+Step 5: loss=511.866528, w0=0.037259, w1=1.697318
+Step 6: loss=430.625438, w0=0.040227, w1=1.793410
+Step 7: loss=383.949025, w0=0.042791, w1=1.866236
+Step 8: loss=357.128414, w0=0.045048, w1=1.921427
+Step 9: loss=341.714036, w0=0.047074, w1=1.963253
+Step 10: loss=332.852010, w0=0.048923, w1=1.994948
+\end{verbatim}
+
+We can observe that the loss value continuously decreases during training, showing that Gradient Descent successfully optimizes the parameters.
+
+The final values of the parameters are approximately:
+
+\[
+w_0 \approx 0.048923
+\]
+
+\[
+w_1 \approx 1.994948
+\]
+
+\section{Conclusion}
+
+In this labwork, we successfully implemented Linear Regression from scratch using Gradient Descent optimization. The implementation computes the gradients of both parameters \(w_0\) and \(w_1\) and iteratively updates them to minimize the loss function.
+
+\end{document}
