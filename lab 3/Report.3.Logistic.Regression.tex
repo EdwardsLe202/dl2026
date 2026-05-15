@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Labwork 2: Gradient Descent}
+\author{Le Nguyen Minh Quang} 
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section{Implement the algorithm}
+
+\textbf{Step 1:} First, I wrote the sigmoid function, the model output \(f(x)\), and the logistic loss \(L(x)\). After that, I worked out the partial derivatives of the loss with respect to each weight \(w_0\), \(w_1\), and \(w_2\) by hand and then coded them up.
+
+\textbf{Step 2:} I initialized \(w_0, w_1, w_2\) with random values. I also set a learning rate \(r\) and picked a threshold so the loop knows when to stop.
+
+\textbf{Step 3:} The main part is the gradient descent loop, which works like this:
+
+\begin{itemize}
+    \item Go through all training samples and calculate the gradient of the loss.
+    
+    \item Update every weight using:
+    \[
+    w = w - r \times \frac{\partial L}{\partial w}
+    \]
+    
+    \item Calculate the average loss again after the update.
+    
+    \item If the loss drops below the threshold, stop. Otherwise, keep going.
+\end{itemize}
+
+Once the loop finishes, I use the final weights to predict the labels for the whole dataset.
+
+\section{Conclusion}
+
+To sum up, in this lab I implemented logistic regression from scratch with gradient descent. The biggest takeaway for me is how much the learning rate affects the whole training process. Too small and you wait forever, too big and it just explodes. The best results came from rates around 0.5--0.6 where the model converged quickly without any issues. Overall, it was a good exercise to understand how gradient-based optimization actually works under the hood.
+
+\end{document}
