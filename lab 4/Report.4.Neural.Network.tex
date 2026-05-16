@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Labwork 2: Gradient Descent}
+\author{Le Nguyen Minh Quang} 
+\date{\today}
+
+\begin{document}
+
+
+
+\maketitle
+
+\section{Network Architecture Design and Implementation}
+In this lab, I implemented a neural network from scratch using proper object-oriented programming (OOP) concepts. Using OOP makes the code much easier to manage than using basic dictionaries or lists. 
+
+I created a few classes for the architecture:
+\begin{itemize}
+    \item \textbf{Layer}: A base class for all layers.
+    \item \textbf{Linear}: This class represents the fully connected layers. It takes the input size and output size. If no weights are given, it initializes random weights using a custom \texttt{RandomGenerator} class.
+    \item \textbf{Sigmoid and ReLU}: These are the activation layers. They apply the math functions to the outputs of the linear layers.
+    \item \textbf{NeuralNetwork}: This class takes a list of layers. When predicting, it just passes the input data through each layer one by one.
+\end{itemize}
+
+\section{Feedforward Implementation}
+The feedforward process in a neural network has two main steps:
+\begin{enumerate}
+    \item \textbf{Linear sum:} We multiply the inputs by the weights and add the bias. The formula is $z = w_1 x_1 + w_2 x_2 + w_0$. In my code, I append a $1$ to the input list $x$ to act as the bias. Then, I use a nested loop in the \texttt{Linear.forward()} method to calculate the sum.
+    \item \textbf{Apply activation function:} We pass the result $z$ through an activation function like Sigmoid or ReLU. The formula is $\hat{y} = \sigma(z)$. In my code, the output of the \texttt{Linear} layer goes directly into the \texttt{forward()} method of the \texttt{ReLU} or \texttt{Sigmoid} class.
+\end{enumerate}
+The \texttt{predict(x)} method inside the \texttt{NeuralNetwork} class loops through all the layers automatically to get the final output.
+
+\section{Experiment with the XOR Network}
+A simple straight line cannot separate the data for the XOR problem. Because of this, we need to use a neural network with a hidden layer.
+
+I built the XOR network using the weights provided in the lab instructions. My network has:
+\begin{itemize}
+    \item A Linear input layer (2 inputs, 2 outputs).
+    \item A ReLU activation layer.
+    \item A Linear output layer (2 inputs, 1 output).
+    \item Another ReLU activation layer.
+\end{itemize}
+
+I ran the network with four different inputs: $(0,0)$, $(0,1)$, $(1,0)$, and $(1,1)$. Here are the results from my Python code:
+
+\begin{verbatim}
+Input: [0, 0] -> Output: [0]
+Input: [0, 1] -> Output: [0.9963199999999999]
+Input: [1, 0] -> Output: [0.99]
+Input: [1, 1] -> Output: [0]
+\end{verbatim}
+
+The outputs for $(0,1)$ and $(1,0)$ are very close to $1$, while the outputs for $(0,0)$ and $(1,1)$ are exactly $0$. This shows that my neural network successfully learned how to solve the XOR problem.
+
+\end{document}
